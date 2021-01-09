@@ -25,7 +25,6 @@ TODO App created using React and Python. Using this app you can create a bucket 
   ` pip install pipenv`
 - Navigate to the location of the app in Command Prompt and run the following commands.  
   `pipenv install flask flask-sqlalchemy`  
-  `pipenv shell`  
   `set FLASK_APP = api`  
   `set FLASK_DEBUG = 1`  
   `pipenv shell`
