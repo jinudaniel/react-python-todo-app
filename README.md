@@ -16,3 +16,19 @@ TODO App created using React and Python. Using this app you can create a bucket 
 **Database**: SQLite
 
 ![Todo App](/assets/app.PNG)
+
+### Steps to run the app locally
+
+- Clone this repository
+- Install the latest version of Python
+- Open Terminal or Command Prompt, install pipenv  
+  ` pip install pipenv`
+- Navigate to the location of the app in Command Prompt and run the following commands.  
+  `pipenv install flask flask-sqlalchemy`  
+  `pipenv shell`  
+  `set FLASK_APP = api`  
+  `set FLASK_DEBUG = 1`  
+  `pipenv shell`
+- Open a new command prompt window, and navigate to client folder. Run the following commands.  
+  `npm install`  
+  `npm start`
