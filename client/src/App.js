@@ -15,7 +15,6 @@ function App() {
     async function fetchData() {
       const response = await fetch("/buckets");
       const result = await response.json();
-      console.log(result);
       setBuckets(result.buckets);
     }
     fetchData();
@@ -25,7 +24,6 @@ function App() {
     async function fetchData() {
       const response = await fetch("/todos");
       const result = await response.json();
-      console.log(result);
       setTodos(result.todos);
     }
     fetchData();
@@ -38,7 +36,7 @@ function App() {
           <h1>TODO App</h1>
           <BucketForm />
           <TodoForm buckets={buckets} />
-          <Card.Group centered fluid>
+          <Card.Group centered>
             {todos &&
               buckets.map((bucket) => {
                 return <TodoCard key={bucket.title} bucket={bucket.title} />;

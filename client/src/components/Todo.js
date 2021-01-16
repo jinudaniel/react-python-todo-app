@@ -2,13 +2,15 @@ import { useContext } from "react";
 import { Grid, Button, Icon } from "semantic-ui-react";
 
 import TodoContext from "../context/context";
-const Todo = ({ title, status }) => {
+const Todo = ({ id, title, status }) => {
   const { todos, setTodos } = useContext(TodoContext);
   return (
     <>
       <Grid columns={3}>
         <Grid.Row>
-          <Grid.Column className={status === "complete" && "completed-todo"}>
+          <Grid.Column
+            className={status === "complete" ? "completed-todo" : ""}
+          >
             {title}
           </Grid.Column>
           <Grid.Column floated="right">
@@ -17,12 +19,10 @@ const Todo = ({ title, status }) => {
                 size="small"
                 color="green"
                 onClick={async () => {
-                  const response = await fetch(
-                    `/update_status/${title}/complete`
-                  );
+                  const response = await fetch(`/update_status/${id}/complete`);
                   if (response.ok) {
                     const updatedTodos = todos.map((todo) => {
-                      if (todo.title === title) {
+                      if (todo.id === id) {
                         todo.status = "complete";
                       }
                       return todo;
@@ -38,12 +38,10 @@ const Todo = ({ title, status }) => {
                 size="small"
                 primary
                 onClick={async () => {
-                  const response = await fetch(
-                    `/update_status/${title}/active`
-                  );
+                  const response = await fetch(`/update_status/${id}/active`);
                   if (response.ok) {
                     const updatedTodos = todos.map((todo) => {
-                      if (todo.title === title) {
+                      if (todo.id === id) {
                         todo.status = "active";
                       }
                       return todo;
@@ -60,9 +58,9 @@ const Todo = ({ title, status }) => {
             <Button
               icon
               onClick={async () => {
-                const response = await fetch(`/delete_todo/${title}`);
+                const response = await fetch(`/delete_todo/${id}`);
                 if (response.ok) {
-                  const newTodos = todos.filter((todo) => todo.title !== title);
+                  const newTodos = todos.filter((todo) => todo.id !== id);
                   setTodos(newTodos);
                 }
               }}

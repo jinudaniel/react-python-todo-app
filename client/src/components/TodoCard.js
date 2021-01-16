@@ -15,7 +15,12 @@ const TodoCard = ({ bucket }) => {
       <Card.Content>
         {filteredTodos.map((todo) => {
           return (
-            <Todo key={todo.title} title={todo.title} status={todo.status} />
+            <Todo
+              key={todo.title}
+              id={todo.id}
+              title={todo.title}
+              status={todo.status}
+            />
           );
         })}
       </Card.Content>

@@ -49,12 +49,13 @@ const TodoForm = ({ buckets }) => {
                   },
                   body: JSON.stringify(todo),
                 });
-
+                const result = await response.json();
                 if (response.ok) {
+                  const id = result["todo_id"];
                   setTitle("");
                   const newTodos = [
                     ...todos,
-                    { title, bucket, status: "active" },
+                    { id, title, bucket, status: "active" },
                   ];
                   setTodos(newTodos);
                 }

@@ -11,7 +11,7 @@ def add_todo():
     new_todo = Todo(title=todo_data["title"], status=todo_data["status"], bucket=todo_data["bucket"])
     db.session.add(new_todo)
     db.session.commit()
-    return "Done", 201
+    return jsonify({"todo_id": new_todo.id}), 201
 
 @main.route("/todos")
 def todos():
@@ -21,16 +21,16 @@ def todos():
         todos.append({"id":item.id, "title": item.title, "status":item.status, "bucket": item.bucket})
     return jsonify({"todos": todos})
 
-@main.route("/delete_todo/<title>")
-def delete_todo(title):
-    todo = Todo.query.filter_by(title=title).one()
+@main.route("/delete_todo/<id>")
+def delete_todo(id):
+    todo = Todo.query.get(id)
     db.session.delete(todo)
     db.session.commit()
     return "Done", 200
 
-@main.route("/update_status/<title>/<status>")
-def update_status(title, status):
-    todo = Todo.query.filter_by(title=title).one()
+@main.route("/update_status/<id>/<status>")
+def update_status(id, status):
+    todo = Todo.query.get(id)
     todo.status = status
     db.session.commit()
     return "Done", 200
